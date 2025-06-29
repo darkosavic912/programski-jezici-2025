@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dodaj stavku u korpu</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+  <style>
+    body {
+      background-color: #212529;
+      color: white;
+    }
+
+    .breadcrumb-item a {
+      color: #adb5bd;
+      text-decoration: none;
+    }
+
+    .breadcrumb-item.active {
+      color: #fff;
+    }
+
+    h3, form {
+      text-align: left;
+    }
+
+    nav.navbar {
+      padding-left: 0;
+    }
+
+    .container {
+      max-width: 100%;
+    }
+
+    .form-control {
+      background-color: #343a40;
+      color: white;
+      border: 1px solid #495057;
+    }
+
+    .form-control:focus {
+      background-color: #343a40;
+      color: white;
+    }
+  </style>
+</head>
+<body data-bs-theme="dark">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/index.html">
+        <i class="fa-solid fa-store"></i> MyOnlineStore
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-start">
+          <li class="nav-item">
+            <a class="nav-link" href="/index.html">
+              <i class="fa-solid fa-house"></i> Početna
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/category.html">
+              <i class="fa-solid fa-layer-group"></i> Kategorije
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/customer.html">
+              <i class="fa-solid fa-user"></i> Korisnici
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/cart.html">
+              <i class="fa-solid fa-cart-shopping"></i> Korpa
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/orders.html">
+              <i class="fa-solid fa-cart-flatbed"></i> Narudzbina
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container px-4">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/index.html">Home</a></li>
+        <li class="breadcrumb-item"><a href="/cart.html">Korpa</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Dodaj</li>
+      </ol>
+    </nav>
+
+    <h3 class="mb-4">Dodaj stavku u korpu</h3>
+
+    <form id="new-cart-form" class="bg-dark p-4 rounded border border-secondary">
+      <div class="mb-3">
+        <label for="productId" class="form-label">ID proizvoda:</label>
+        <input type="number" class="form-control" id="productId" required>
+      </div>
+      <div class="mb-3">
+        <label for="productName" class="form-label">Ime proizvoda:</label>
+        <input type="text" class="form-control" id="productName" required>
+      </div>
+      <div class="mb-3">
+        <label for="price" class="form-label">Cena:</label>
+        <input type="number" step="0.01" class="form-control" id="price" required>
+      </div>
+      <button type="submit" class="btn btn-success">
+        <i class="fa-solid fa-cart-plus"></i> Sačuvaj
+      </button>
+      <a href="/cart.html" class="btn btn-secondary ms-2">Otkaži</a>
+    </form>
+  </div>
+
+  <footer class="text-center">
+    <div class="container pt-4">
+      <section class="mb-4">
+        <a class="btn btn-link btn-floating btn-lg text-light m-1" href="#!" role="button">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a class="btn btn-link btn-floating btn-lg text-light m-1" href="#!" role="button">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a class="btn btn-link btn-floating btn-lg text-light m-1" href="#!" role="button">
+          <i class="fab fa-google"></i>
+        </a>
+        <a class="btn btn-link btn-floating btn-lg text-light m-1" href="#!" role="button">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a class="btn btn-link btn-floating btn-lg text-light m-1" href="#!" role="button">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a class="btn btn-link btn-floating btn-lg text-light m-1" href="#!" role="button">
+          <i class="fab fa-github"></i>
+        </a>
+      </section>
+    </div>
+    <div class="text-center p-3">
+      © 2025 Copyright: <a class="text-light" style="text-decoration: none;" href="#">MyOnlineStore</a>
+    </div>
+  </footer>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+   
+    const customerId = 1;
+
+    document.getElementById('new-cart-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const productId = parseInt(document.getElementById('productId').value);
+      const productName = document.getElementById('productName').value;
+      const price = parseFloat(document.getElementById('price').value);
+
+      axios.post('/api/cart', {
+        customer: { id: customerId },
+        productId,
+        productName,
+        price
+      })
+        .then(() => {
+          window.location.href = '/cart.html';
+        })
+        .catch(err => {
+          console.error('Greška prilikom dodavanja stavke u korpu:', err);
+          alert('Došlo je do greške pri dodavanju.');
+        });
+    });
+  </script>
+</body>
+</html>
